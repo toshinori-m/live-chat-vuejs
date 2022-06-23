@@ -1,14 +1,27 @@
 <template>
   <div class="container welcome">
     <p>ようこそ！</p>
-    <LoginForm />
+    <div v-if="shouldShowLoginForm">
+      <LoginForm />
+      <p class="change-form">初めての方は<span @click="shouldShowLoginForm = false">こちら</span>をクリック</p>
+    </div>
+    <div v-if="!shouldShowLoginForm">
+      <SignupForm />
+      <p class="change-form">アカウントをお持ちの方は<span @click="shouldShowLoginForm = true">こちら</span>をクリック</p>
+    </div>
   </div>
 </template>
 
 <script>
 import LoginForm from '../components/LoginForm.vue'
+import SignupForm from '../components/SignupForm.vue'
 export default {
-  components: { LoginForm },
+  components: { LoginForm, SignupForm },
+    data () {
+    return {
+      shouldShowLoginForm: true
+    }
+  }
 }
 </script>
 
@@ -41,5 +54,9 @@ export default {
   }
   .welcome button {
     margin: 20px auto;
+  }
+  .change-form {
+    font-size: 14px;
+    margin: 10px;
   }
 </style>
