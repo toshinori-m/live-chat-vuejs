@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import NavbarForm from '../components/NavbarForm'
+import NavbarForm from '../components/NavbarForm.vue'
 
 export default {
   components: { NavbarForm },
