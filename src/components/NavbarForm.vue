@@ -43,7 +43,7 @@ export default {
           window.localStorage.removeItem('uid')
           window.localStorage.removeItem('name')
 
-          this.$router.push({ name: 'Welcome' })
+          this.$router.push({ name: 'WelcomePage' })
         }
 
         return res
@@ -54,7 +54,6 @@ export default {
   }
 }
 </script>
-
 
 <style scoped>
   nav {
