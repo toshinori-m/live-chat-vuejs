@@ -1,6 +1,9 @@
 import axios from 'axios'
+import { ref } from 'vue'
 
+const error = ref(null)
 const validate = async () => {
+  error.value = null
   const uid = window.localStorage.getItem('uid')
   const client = window.localStorage.getItem('client')
   const accessToken = window.localStorage.getItem('access-token')
@@ -13,15 +16,22 @@ const validate = async () => {
         client: client
       }
     })
-
+    if (!res) {
+      throw new Error('認証に失敗しました')
+    }
     return res
   } catch (err) {
-    console.log(err)
-  } 
+    error.value = '認証に失敗しました'
+
+    window.localStorage.removeItem('uid')
+    window.localStorage.removeItem('access-token')
+    window.localStorage.removeItem('client')
+    window.localStorage.removeItem('name')
+  }
 }
 
 const useValidate = () => {
-  return { validate }
+  return { error, validate }
 }
 
 export default useValidate
