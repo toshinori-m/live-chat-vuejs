@@ -4,7 +4,13 @@
       <ul v-for="message in messages" :key="message.id">
         <li :class="{ received: message.email !== uid, sent: message.email === uid }">
           <span class="name">{{ message.name }}</span>
-          <span class="message">{{ message.content }}</span>
+          <div class="message" @dblclick="createLike(message.id)">
+            {{ message.content }}
+            <div v-if="message.likes.length" class="heart-container">
+              <font-awesome-icon icon="heart" class="heart" />
+              <span class="heart-count">{{ message.likes.length }}</span>
+            </div>
+          </div>
           <span class="created-at">{{ message.created_at }}</span>
         </li>
       </ul>
@@ -13,13 +19,36 @@
 </template>
 
 <script>
+import axios from 'axios' 
 export default {
+  emits: ['connectCable'],
   props: ['messages'],
   data () {
     return {
       uid: localStorage.getItem('uid')
     }
   },
+  methods: {
+    async createLike (messageId) {
+      try {
+        const res = await axios.post(`http://localhost:3000/messages/${messageId}/likes`, {},
+          {
+            headers: {
+              uid: this.uid,
+              "access-token": window.localStorage.getItem('access-token'),
+              client: window.localStorage.getItem('client')
+            }
+          })
+
+        if (!res) {
+          new Error('いいねできませんでした')
+        }
+        this.$emit('connectCable')
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }
 }
 </script>
 
@@ -77,5 +106,39 @@ export default {
   .messages {
     max-height: 400px;
     overflow: auto;
+  }
+  .message {
+    position: relative;
+  }
+
+  .heart-container {
+    background: white;
+    position: absolute;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 30px;
+    min-width: 25px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(245, 245, 245);
+    padding: 1px 2px;
+    z-index: 2;
+    bottom: -7px;
+    right: 0px;
+    font-size: 9px;
+  }
+  .heart {
+    color: rgb(236, 29, 29);
+  }
+  .heart-count {
+    color: rgb(20, 19, 19);
+  }
+  .received .message::selection {
+    background: #eee;
+  }
+
+  .sent .message::selection {
+    background: #677bb4;
   }
 </style>

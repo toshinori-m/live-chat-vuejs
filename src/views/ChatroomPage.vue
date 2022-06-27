@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <NavbarForm />
-    <ChatWindow :messages="messages" />
+    <ChatWindow @connectCable="connectCable" :messages="messages" />
     <NewChatForm @connectCable="connectCable" />
   </div>
 </template>
