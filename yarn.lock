@@ -1819,6 +1819,11 @@
   "resolved" "https://registry.npmmirror.com/acorn/-/acorn-7.4.1.tgz"
   "version" "7.4.1"
 
+"actioncable@^5.2.8":
+  "integrity" "sha512-M/CfC7qDT7tux8B0BNYPek+aCw6OjB78K9l978Ff94U8v6+G9LOVCEnSFg4gxdAboRV8KTy9eTK3Wxbry4SXJA=="
+  "resolved" "https://registry.npmjs.org/actioncable/-/actioncable-5.2.8.tgz"
+  "version" "5.2.8"
+
 "address@^1.1.2":
   "integrity" "sha512-tNEZYz5G/zYunxFm7sfhAxkXEuLj3K6BKwv6ZURlsF6yiUQ65z0Q2wZW9L5cPUl9ocofGvXOdFYbFHp0+6MOig=="
   "resolved" "https://registry.npmmirror.com/address/-/address-1.2.0.tgz"
