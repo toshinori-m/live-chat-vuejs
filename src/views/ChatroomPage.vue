@@ -1,6 +1,9 @@
 <template>
   <div class="container">
     <NavbarForm />
+    <CalendarForm />
+    <!-- <v-calendar />
+    <DatePicker v-model="date" /> -->
     <ChatWindow @connectCable="connectCable" :messages="formattedMessages" ref="chatWindow" />
     <NewChatForm @connectCable="connectCable" />
   </div>
@@ -8,6 +11,7 @@
 
 <script>
 import NavbarForm from '../components/NavbarForm'
+import CalendarForm from '../components/CalendarForm'
 import ChatWindow from '../components/ChatWindow'
 import NewChatForm from '../components/NewChatForm'
 import axios from 'axios'
@@ -16,7 +20,8 @@ import { formatDistanceToNow } from 'date-fns'
 import { ja } from 'date-fns/locale'
 
 export default {
-    components: { NavbarForm, ChatWindow, NewChatForm },
+    components: { NavbarForm, CalendarForm, ChatWindow, NewChatForm },
+    // components: { NavbarForm, ChatWindow, NewChatForm },
   data () {
     return {
       messages: [],
