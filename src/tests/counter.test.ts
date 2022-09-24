@@ -1,6 +1,3 @@
-/**
- * @jest-environment jsdom
- */
 import { render, fireEvent } from "@testing-library/vue";
 import Counter from "../components/CounterForm.vue"
 
